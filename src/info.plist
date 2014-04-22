@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.cube.finder.pwd</string>
+	<key>connections</key>
+	<dict>
+		<key>A1DE3E63-554A-4863-AD51-45A0E21335BF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F6F43C7-4446-4FF4-A352-48FAC42CD48D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4913670B-A6CD-47F0-AEF0-B8211627FEAC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cube</string>
+	<key>description</key>
+	<string>pwd</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Finder</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6F6F43C7-4446-4FF4-A352-48FAC42CD48D</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>keyword</key>
+				<string>pwd</string>
+				<key>script</key>
+				<string>tell application "Finder"
+  try  
+      set pwd to (folder of the front window as alias)
+  on error
+      set pwd to (path to desktop folder as alias)
+  end try
+  set pwd  to (POSIX path of pwd)
+  set xml to ("
+    &lt;?xml version='1.0'?&gt;
+    &lt;items&gt;
+    &lt;item uid='' arg='" &amp; pwd &amp; "'&gt;
+      &lt;title&gt;" &amp; (do shell script "basename " &amp; quoted form of pwd) &amp; "&lt;/title&gt;                                         
+      &lt;subtitle&gt;" &amp; pwd &amp; "&lt;/subtitle&gt;
+      &lt;icon&gt;icon.png&lt;/icon&gt;
+    &lt;/item&gt;
+    &lt;/items&gt;
+  ")   
+  do shell script "echo " &amp; quoted form of xml
+end tell</string>
+				<key>type</key>
+				<integer>6</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A1DE3E63-554A-4863-AD51-45A0E21335BF</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Copy Current Finder Path</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>4913670B-A6CD-47F0-AEF0-B8211627FEAC</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>4913670B-A6CD-47F0-AEF0-B8211627FEAC</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>6F6F43C7-4446-4FF4-A352-48FAC42CD48D</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>A1DE3E63-554A-4863-AD51-45A0E21335BF</key>
+		<dict>
+			<key>ypos</key>
+			<real>80</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
